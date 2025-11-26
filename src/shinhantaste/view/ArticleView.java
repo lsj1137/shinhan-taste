@@ -21,4 +21,8 @@ public class ArticleView {
         }
         System.out.println("----------------------------------------");
 	}
+	
+	public static void printDeleteMenu() {
+		System.out.println("삭제할 글을 선택해주세요 >> ");
+	}
 }
