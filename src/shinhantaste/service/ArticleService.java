@@ -20,6 +20,10 @@ public class ArticleService {
 		return articleDAO.selectArticleByJob(job);
 	}
 	
+	public ArticleDTO selectArticleDetail(int articleId) {
+		return articleDAO.selectArticleDetial(articleId);
+	}
+	
 	public String deleteArticle(Integer articleId) {
 		return articleDAO.deleteArticle(articleId);
 	}
