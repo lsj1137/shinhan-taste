@@ -14,6 +14,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
+@ToString
 public class ArticleDTO {
 	@NonNull
 	private Integer articleId;
