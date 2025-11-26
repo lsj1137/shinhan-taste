@@ -2,8 +2,13 @@ package shinhantaste.controller;
 
 import java.util.Scanner;
 
+import shinhantaste.dto.ArticleDTO;
+
 public class UpdateController {
-	
-	public static void execute() {
-	}
+
+    Scanner sc = new Scanner(System.in);
+
+    public void execute() {
+    	
+    }
 }
