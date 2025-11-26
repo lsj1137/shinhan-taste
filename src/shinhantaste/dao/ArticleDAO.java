@@ -51,6 +51,36 @@ public class ArticleDAO {
 		
 	}
 	
+	public String insertArticle(ArticleDTO articleDTO) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String result = "";
+
+        try {
+            conn = DBUtil.dbConnect();
+            pstmt = conn.prepareStatement(SQLQuery.INSERT_ARTICLE);
+			pstmt.setLong(1, articleDTO.getCategoryId());
+			pstmt.setString(2, articleDTO.getTitle());
+			pstmt.setString(3, articleDTO.getRestaurant());
+			pstmt.setInt(4, articleDTO.getRating());
+			pstmt.setString(5, articleDTO.getReview());
+			pstmt.setInt(6, articleDTO.getDistance());
+			pstmt.setString(7,  articleDTO.getPassword());
+			int done = pstmt.executeUpdate();
+			if (done>0) {
+				result = "글 등록을 완료했습니다.";
+			}
+        } catch (SQLException e) {
+        	result = "글 등록에 실패했습니다.";
+            e.printStackTrace();
+        } finally {
+            DBUtil.dbDisconnect(conn, pstmt, rs);
+        }
+        
+		return result;
+	}
+	
 	
 	
 }
