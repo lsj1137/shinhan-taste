@@ -6,6 +6,6 @@ public class PrintUtil {
 	}
 	
 	public static void alert(String message) {
-		System.out.println(message);
+		System.out.print(message+" >> ");
 	}
 }
