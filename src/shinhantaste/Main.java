@@ -18,7 +18,7 @@ public class Main {
 		System.out.print("작업 선택 >> ");
 		String job = sc.next();
 
-		while (isStop) {
+		while (!isStop) {
 			switch (job) {
 			case "1" -> {
 				insertController.execute();
