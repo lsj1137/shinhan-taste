@@ -19,4 +19,8 @@ public class ArticleService {
 	public List<ArticleDTO> selectArticleByJob(String job) {
 		return articleDAO.selectArticleByJob(job);
 	}
+	
+	public String deleteArticle(Integer articleId) {
+		return articleDAO.deleteArticle(articleId);
+	}
 }

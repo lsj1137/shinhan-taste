@@ -144,4 +144,28 @@ public class ArticleDAO {
 		return articleList;
 
 	}
+	
+	
+	public String deleteArticle(Integer articleId) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+        String result = "";
+
+        try {
+            conn = DBUtil.dbConnect();
+            pstmt = conn.prepareStatement(SQLQuery.DELETE_ARTICLE);
+			pstmt.setLong(1, articleId);
+			int done = pstmt.executeUpdate();
+			if (done>0) {
+				result = "글 삭제를 완료했습니다.";
+			}
+        } catch (SQLException e) {
+        	result = "글 삭제에 실패했습니다.";
+            e.printStackTrace();
+        } finally {
+            DBUtil.dbDisconnect(conn, pstmt, rs);
+        }
+		return result;
+	}
 }

@@ -9,16 +9,22 @@ INSERT INTO ARTICLE (category_id, title, restaurant, rating, review, distance, p
 VALUES (?, ?, ?, ?, ?, ?, ?, SYSDATE)
 """;
 	public static final String UPDATE_ARTICLE = """
-			update article set categoryId=?, title=?, restaurant=?, rating=?, review=?, distance=? where articleId = ?
+			update article 
+			set categoryId=?, title=?, restaurant=?, rating=?, review=?, distance=?
+			where articleId = ?
 			
 """;
 	public static final String DELETE_ARTICLE = """
-			
+			delete 
+			from article
+			where article_id = ?
 """;
 	
 	//최신순, 별점순 정렬
 	public static final String SELECT_ARTICLE_BY_JOB = """
-			select * from article order by %s desc
+			select *
+			from article
+			order by %s desc
 """;
 	
 
