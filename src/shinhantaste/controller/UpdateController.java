@@ -1,6 +1,8 @@
 package shinhantaste.controller;
 
-public class UpdateController {
+import java.util.Scanner;
 
+public class UpdateController {
+	
 	public static void execute() {}
 }
