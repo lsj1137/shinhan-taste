@@ -1,13 +1,16 @@
 package shinhantaste.service;
 
-import java.util.List;
-
 import shinhantaste.dao.ArticleDAO;
 import shinhantaste.dto.ArticleDTO;
 
-public class ArticleService {
+import java.util.List;
 
+public class ArticleService {
 	ArticleDAO articleDAO = new ArticleDAO();
+
+	public String insertArticle(ArticleDTO articleDTO) {
+		return articleDAO.insertArticle(articleDTO);
+	}
 
 	public void updateArticle(ArticleDTO articleDTO) {
 		articleDAO.updateArticle(articleDTO);

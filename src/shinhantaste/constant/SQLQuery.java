@@ -5,7 +5,8 @@ public class SQLQuery {
 			
 """;
 	public static final String INSERT_ARTICLE = """
-
+INSERT INTO ARTICLE (category_id, title, restaurant, rating, review, distance, password, created_at)
+VALUES (?, ?, ?, ?, ?, ?, ?, SYSDATE)
 """;
 	public static final String UPDATE_ARTICLE = """
 			update article set categoryId=?, title=?, restaurant=?, rating=?, review=?, distance=? where articleId = ?
