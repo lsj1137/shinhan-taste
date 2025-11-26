@@ -4,5 +4,6 @@ import java.util.Scanner;
 
 public class UpdateController {
 	
-	public static void execute() {}
+	public static void execute() {
+	}
 }

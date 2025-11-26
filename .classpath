@@ -6,6 +6,10 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="/Users/nyung/Downloads/lombok.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/work/library/lombok.jar"/>
+>>>>>>> 85413f907b076defce42e1f48550c279e4f7cb70
 	<classpathentry kind="output" path="bin"/>
 </classpath>
