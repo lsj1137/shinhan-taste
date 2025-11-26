@@ -2,11 +2,13 @@ package shinhantaste.controller;
 
 import java.util.Scanner;
 import shinhantaste.dto.ArticleDTO;
+import shinhantaste.service.ArticleService;
 import shinhantaste.util.InputChecker;
 import shinhantaste.util.PrintUtil;
 
 public class InsertController {
 	Scanner sc = new Scanner(System.in);
+	ArticleService articleService = new ArticleService();
 
 	public void execute() {
 		ArticleDTO articleDTO = new ArticleDTO();
@@ -20,9 +22,10 @@ public class InsertController {
 			getReview(articleDTO);
 			getDistance(articleDTO);
 			getPassWord(articleDTO);
-			System.out.println(articleDTO);
 			confirmed = getConfirmation();
 		} while (!confirmed);
+		String result = articleService.insertArticle(articleDTO);
+		PrintUtil.alert(result);
 	}
 
 	public ArticleDTO getTitle(ArticleDTO articleDTO) {
@@ -92,36 +95,27 @@ public class InsertController {
 
 	public ArticleDTO getReview(ArticleDTO articleDTO) {
 		StringBuilder reviewBuilder = new StringBuilder();
-		int emptyLineCount = 0;
-
+		String review = "";
+		String line = null;
+		sc.nextLine();
 		while (true) {
-			PrintUtil.request("평가를 입력하세요(100자 이내, 끝내려면 Enter 2번 입력)");
-			reviewBuilder.setLength(0);
-			while (true) {
-
-				String line = sc.nextLine();
-
-				if (line.isEmpty()) {
-					emptyLineCount++;
-					if (emptyLineCount >= 2) {
-						break;
-					}
+			PrintUtil.request("평가를 입력하세요(100자 이내, 끝내려면 Enter 2번 입력)\n");
+			boolean keepWrite = true;
+			while (keepWrite = InputChecker.endReviewInput(line = sc.nextLine())) {
+				reviewBuilder.append(line);
+				if (keepWrite) {
 					reviewBuilder.append("\n");
-				} else {
-					emptyLineCount = 0;
-					reviewBuilder.append(line).append("\n");
 				}
 			}
-
-			String review = reviewBuilder.toString().trim();
-
 			if (InputChecker.lengthCheck(review, 100)) {
-				articleDTO.setReview(review);
 				break;
 			} else {
 				PrintUtil.alert("100자를 넘길 수 없습니다. 다시 입력해주세요.");
+				reviewBuilder = new StringBuilder();
 			}
 		}
+		review = reviewBuilder.toString();
+		articleDTO.setReview(review);
 		return articleDTO;
 	}
 
