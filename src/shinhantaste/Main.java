@@ -3,13 +3,14 @@ package shinhantaste;
 import java.util.Scanner;
 
 import shinhantaste.controller.InsertController;
+import shinhantaste.controller.SelectController;
 import shinhantaste.controller.UpdateController;
 
 public class Main {
 
     static Scanner sc = new Scanner(System.in);
     static InsertController insertController = new InsertController();
-    static UpdateController updateController = new UpdateController();
+    static SelectController selectController = new SelectController();
 
     public static void main(String[] args) {
        boolean isStop = false;
@@ -24,7 +25,7 @@ public class Main {
 				insertController.execute();
 			}
 			case "2" -> {
-				updateController.execute();
+				selectController.execute();
 			}
 			default -> {
 				isStop = true;
