@@ -1,10 +1,14 @@
 package shinhantaste.controller;
 
+import java.util.List;
 import java.util.Scanner;
 import shinhantaste.dto.ArticleDTO;
+import shinhantaste.dto.CategoryDTO;
 import shinhantaste.service.ArticleService;
+import shinhantaste.service.CategoryService;
 import shinhantaste.util.InputChecker;
 import shinhantaste.util.PrintUtil;
+import shinhantaste.view.CategoryView;
 
 public class InsertController {
 	Scanner sc = new Scanner(System.in);
