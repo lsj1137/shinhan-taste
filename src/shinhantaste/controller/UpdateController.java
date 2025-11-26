@@ -3,10 +3,12 @@ package shinhantaste.controller;
 import java.util.Scanner;
 
 import shinhantaste.dto.ArticleDTO;
+import shinhantaste.service.ArticleService;
 
 public class UpdateController {
 
 	Scanner sc = new Scanner(System.in);
+	ArticleService articleService = new ArticleService();
 
 	public void execute() {
 		ArticleDTO articleDTO = new ArticleDTO();
@@ -67,5 +69,7 @@ public class UpdateController {
 			distance = Integer.parseInt(data);
 			articleDTO.setDistance(rating);
 		}
+		
+		articleService.updateArticle(articleDTO);
 	}
 }
