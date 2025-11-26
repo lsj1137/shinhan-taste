@@ -9,12 +9,18 @@ public class SQLQuery {
 			VALUES (?, ?, ?, ?, ?, ?, ?, SYSDATE)
 			""";
 	public static final String UPDATE_ARTICLE = """
-						update article set categoryId=?, title=?, restaurant=?, rating=?, review=?, distance=? where articleId = ?
-
-			""";
+			update article 
+			set categoryId=?, title=?, restaurant=?, rating=?, review=?, distance=?
+			where articleId = ?
+			
+""";
 	public static final String DELETE_ARTICLE = """
-
-			""";
+			delete 
+			from article
+			where article_id = ?
+""";
+	
+	//최신순, 별점순 정렬
 
 	public static final String SELECT_CATEGORY = """
 			select * from category order by category_id
@@ -22,10 +28,13 @@ public class SQLQuery {
 
 	// 최신순, 별점순 정렬
 	public static final String SELECT_ARTICLE_BY_JOB = """
-						select * from article order by %s desc
-			""";
+			select *
+			from article
+			order by %s desc
+""";
+	
 
-	// 특정 카테고리만 조회
+	//특정 카테고리만 조회
 	public static final String SELECT_ARTICLE_ONLY_JOB = """
 						select * from article where categoryId = ?
 			""";

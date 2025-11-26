@@ -11,15 +11,15 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
     static InsertController insertController = new InsertController();
     static SelectController selectController = new SelectController();
-
+    
     public static void main(String[] args) {
        boolean isStop = false;
-       System.out.println("1. 글쓰기");
-       System.out.println("2. 글조회");
-       System.out.print("작업 선택 >> ");
-       String job = sc.next();
 
 		while (!isStop) {
+	        System.out.println("1. 글쓰기");
+	        System.out.println("2. 글조회");
+	        System.out.print("작업 선택 >> ");
+	        String job = sc.next();
 			switch (job) {
 			case "1" -> {
 				insertController.execute();
