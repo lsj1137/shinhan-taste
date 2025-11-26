@@ -1,8 +1,5 @@
 config.properties
-<<<<<<< HEAD
 *.jar
 /lib/
-=======
 .classpath
 .idea/
->>>>>>> 85413f907b076defce42e1f48550c279e4f7cb70
