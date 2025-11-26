@@ -9,6 +9,7 @@ import shinhantaste.util.PrintUtil;
 public class InsertController {
 	Scanner sc = new Scanner(System.in);
 	ArticleService articleService = new ArticleService();
+	CategoryService categoryService = new CategoryService();
 
 	public void execute() {
 		ArticleDTO articleDTO = new ArticleDTO();
@@ -63,7 +64,8 @@ public class InsertController {
 
 	public ArticleDTO getCategory(ArticleDTO articleDTO) {
 		PrintUtil.request("카테고리를 입력하세요.(필수)");
-
+		List<CategoryDTO> categoryList = categoryService.selectAll();
+		CategoryView.CategoryMenu(categoryList);
 		while (true) {
 			Integer categoryId = sc.nextInt();
 			if (categoryId == null) {

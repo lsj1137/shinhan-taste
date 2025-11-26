@@ -14,5 +14,8 @@ VALUES (?, ?, ?, ?, ?, ?, ?, SYSDATE)
 	public static final String DELETE_ARTICLE = """
 			
 """;
+	public static final String SELECT_CATEGORY = """
+			select * from category order by category_id
+			""";
 
 }

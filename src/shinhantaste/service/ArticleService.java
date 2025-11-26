@@ -9,5 +9,4 @@ public class ArticleService {
 	public String insertArticle(ArticleDTO articleDTO) {
 		return articleDAO.insertArticle(articleDTO);
 	}
-
 }
