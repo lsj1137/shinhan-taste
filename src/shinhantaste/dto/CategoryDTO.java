@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class CategoryDTO {
 	@NonNull
-	private int categoryId;
+	private Integer categoryId;
 	@NonNull
 	private String categoryName;
 }

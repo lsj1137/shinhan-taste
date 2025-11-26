@@ -7,24 +7,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class ArticleDTO {
 	@NonNull
-	private int articleId;
+	private Integer articleId;
 	@NonNull
-	private int categoryId;
+	private Integer categoryId;
 	@NonNull
 	private String title;
 	@NonNull
 	private String restaurant;
 	@NonNull
-	private int rating;
+	private Integer rating;
 	private String review;
-	private int distance;
+	private Integer distance;
 	@NonNull
 	private String password;
 	@NonNull
