@@ -41,4 +41,8 @@ public class ArticleView {
             case 4 -> "양식"; case 7 -> "기타"; default -> "기타";
         };
     }
+	
+	public static void getPassword() {
+		System.out.print("글 작성 시 입력한 비밀번호를 다시 입력해주세요>> ");
+	}
 }
