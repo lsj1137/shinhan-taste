@@ -42,6 +42,10 @@ public class ArticleView {
         };
     }
 	
+	public static void printDetailMenu() {
+		System.out.print("1. 수정  2. 삭제  0. 글 목록으로\n선택>> ");
+	}
+	
 	public static void getPassword() {
 		System.out.print("글 작성 시 입력한 비밀번호를 다시 입력해주세요>> ");
 	}
