@@ -129,13 +129,15 @@ public class InsertController {
 		sc.nextLine();
 		while (true) {
 			PrintUtil.request("평가를 입력하세요(100자 이내, 끝내려면 Enter 2번 입력)\n");
-			sc.nextLine();  // 위에 \n 제거
-			boolean keepWrite = true;
-			while (keepWrite = InputChecker.endReviewInput(line = sc.nextLine())) {
+			boolean isFirstLine = true;
+			while ( InputChecker.endReviewInput(line = sc.nextLine())) {
+				if (!isFirstLine) {
+                    reviewBuilder.append("\n");
+                } else {
+                    isFirstLine = false;
+                }
 				reviewBuilder.append(line);
-				if (keepWrite) {
-					reviewBuilder.append("\n");
-				}
+
 			}
 			if (InputChecker.lengthCheck(review, 100)) {
 				break;
