@@ -179,6 +179,9 @@ public class ArticleDAO {
 
 			if (rs.next()) {
 				articleDTO = makeArticle(rs);
+			}else {
+				// 잘못된 articleId인 경우 null 반환
+				return null;
 			}
 		} catch (SQLException e) {
 
