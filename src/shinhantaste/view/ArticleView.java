@@ -1,6 +1,7 @@
 package shinhantaste.view;
 import java.util.List;
 import shinhantaste.dto.ArticleDTO;
+import shinhantaste.util.PrintUtil;
 public class ArticleView {
 	public static void print(List<ArticleDTO> articleList) {
 		System.out.println("글 번호 | [식당이름] | 제목 | 별점");
@@ -47,6 +48,6 @@ public class ArticleView {
 	}
 	
 	public static void getPassword() {
-		System.out.print("글 작성 시 입력한 비밀번호를 다시 입력해주세요>> ");
+		PrintUtil.request("글 작성 시 입력한 비밀번호를 다시 입력해주세요");
 	}
 }

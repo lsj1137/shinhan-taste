@@ -12,8 +12,8 @@ public class ArticleService {
 		return articleDAO.insertArticle(articleDTO);
 	}
 
-	public void updateArticle(ArticleDTO articleDTO) {
-		articleDAO.updateArticle(articleDTO);
+	public int updateArticle(ArticleDTO articleDTO) {
+		return articleDAO.updateArticle(articleDTO);
 	}
 
 	public List<ArticleDTO> selectArticleByJob(String job) {

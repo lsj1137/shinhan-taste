@@ -13,18 +13,15 @@ public class UpdateController {
 	Scanner sc = new Scanner(System.in);
 	ArticleService articleService = new ArticleService();
 
-	public void execute(ArticleDTO prevArticleDTO) {
+	public int execute(ArticleDTO prevArticleDTO) {
 
 		ArticleView.getPassword();
 		while (true) {
 			String curPw = sc.next();
-			PrintUtil.request("비밀번호를 입력하세요.");
 			if (!curPw.isEmpty()) {
 				// 비밀번호의 형태가 잘못되었거나, 작성 시 입력한 비밀번호와 다를 때
 				if (!InputChecker.validPassword(curPw) || !articleService.checkPassword(prevArticleDTO, curPw)) {
-					PrintUtil.alert("비밀번호가 틀립니다.");
-					// TODO: 글 상세 페이지로 돌아가기
-					return;
+					return -1;
 				} else {
 					// 비밀번호 일치 입력 메시지
 					PrintUtil.alert("비밀번호가 일치합니다.\n 수정 가능합니다.\n");
@@ -32,11 +29,12 @@ public class UpdateController {
 				}
 			}
 		}
-
+		sc.nextLine();
 		ArticleDTO articleDTO = new ArticleDTO();
+		articleDTO.setArticleId(prevArticleDTO.getArticleId());
 		String data = null;
 
-		PrintUtil.request("글 제목(최대 30자)>> ");
+		PrintUtil.request("글 제목(최대 30자)");
 		String title = null;
 		data = sc.nextLine().trim();
 		if (!data.isEmpty()) {
@@ -46,7 +44,7 @@ public class UpdateController {
 		}
 		articleDTO.setTitle(title);
 
-		PrintUtil.request("식당 이름>> ");
+		PrintUtil.request("식당 이름");
 		String restaurant = null;
 		data = sc.nextLine().trim();
 		if (!data.isEmpty()) {
@@ -67,7 +65,7 @@ public class UpdateController {
 		}
 		articleDTO.setCategoryId(categoryId);
 
-		PrintUtil.request("별점>> ");
+		PrintUtil.request("별점");
 		Integer rating = null;
 		data = sc.nextLine().trim();
 		if (!data.isEmpty()) {
@@ -77,7 +75,7 @@ public class UpdateController {
 		}
 		articleDTO.setRating(rating);
 
-		PrintUtil.request("평가(최대 100자, 입력을 끝내려면 Enter 2번)>> ");
+		PrintUtil.request("평가(최대 100자, 입력을 끝내려면 Enter 2번)");
 		String review = null;
 		StringBuilder sb = new StringBuilder();
 		while (true) {
@@ -95,7 +93,7 @@ public class UpdateController {
 		}
 		articleDTO.setReview(review);
 
-		PrintUtil.request("위치(도보 몇 분)>> ");
+		PrintUtil.request("위치(도보 몇 분)");
 		Integer distance = null;
 		data = sc.nextLine().trim();
 		if (!data.isEmpty()) {
@@ -105,7 +103,7 @@ public class UpdateController {
 		}
 		articleDTO.setDistance(distance);
 
-		articleService.updateArticle(articleDTO);
+		return articleService.updateArticle(articleDTO);
 
 	}
 }
