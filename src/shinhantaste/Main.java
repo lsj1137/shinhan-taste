@@ -34,11 +34,11 @@ public class Main {
 				isStop = true;
 			}
 			default -> {
-				PrintUtil.alert("잘못된 번호입니다.");
+				PrintUtil.alert("잘못된 번호입니다.\n");
 				PrintUtil.request("다시 입력해주세요");
 			}
 			}
 		}
-		System.out.println("프로그램을 종료합니다.");
+		PrintUtil.alert("프로그램을 종료합니다.");
 	}
 }
