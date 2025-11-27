@@ -68,7 +68,7 @@ public class InsertController {
 	public ArticleDTO getCategory(ArticleDTO articleDTO) {
 		PrintUtil.request("카테고리를 입력하세요.(필수)");
 		List<CategoryDTO> categoryList = categoryService.selectAll();
-		CategoryView.CategoryMenu(categoryList);
+		System.out.println(CategoryView.CategoryMenu(categoryList));
 		while (true) {
 			String categoryId = sc.nextLine();
 			if (categoryId.isEmpty()) {
