@@ -1,15 +1,10 @@
 package shinhantaste.view;
-
 import java.util.List;
-
 import shinhantaste.dto.ArticleDTO;
-
 public class ArticleView {
-
 	public static void print(List<ArticleDTO> articleList) {
 		System.out.println("글 번호 | [식당이름] | 제목 | 별점");
         System.out.println("----------------------------------------");
-
         for (ArticleDTO dto : articleList) {
             System.out.printf("%d | [%s] | %s | %d\n",
                 dto.getArticleId(),
@@ -42,8 +37,16 @@ public class ArticleView {
 	
 	private static String getCategoryName(int id) {
         return switch (id) {
+<<<<<<< HEAD
             case 1 -> "한식"; case 2 -> "중식"; case 3 -> "일식"; 
             case 4 -> "양식"; case 7 -> "기타"; default -> "기타";
         };
     }
 }
+=======
+            case 1 -> "한식"; case 2 -> "중식"; case 3 -> "일식";
+            case 4 -> "양식"; case 7 -> "기타"; default -> "기타";
+        };
+    }
+}
+>>>>>>> 36757b60b35fca55617df346a5cee7646365ce80

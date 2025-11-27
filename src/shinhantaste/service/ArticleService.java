@@ -1,12 +1,11 @@
 package shinhantaste.service;
 
-<<<<<<< HEAD
 import java.util.List;
 
-=======
->>>>>>> develop
 import shinhantaste.dao.ArticleDAO;
 import shinhantaste.dto.ArticleDTO;
+
+import java.util.List;
 
 public class ArticleService {
 	ArticleDAO articleDAO = new ArticleDAO();
@@ -15,13 +14,19 @@ public class ArticleService {
 		return articleDAO.insertArticle(articleDTO);
 	}
 
-	ArticleDAO articleDAO = new ArticleDAO();
-
 	public void updateArticle(ArticleDTO articleDTO) {
 		articleDAO.updateArticle(articleDTO);
 	}
 
 	public List<ArticleDTO> selectArticleByJob(String job) {
 		return articleDAO.selectArticleByJob(job);
+	}
+	
+	public ArticleDTO selectArticleDetail(int articleId) {
+		return articleDAO.selectArticleDetial(articleId);
+	}
+	
+	public String deleteArticle(Integer articleId) {
+		return articleDAO.deleteArticle(articleId);
 	}
 }
