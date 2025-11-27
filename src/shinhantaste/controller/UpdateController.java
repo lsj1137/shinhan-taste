@@ -10,8 +10,7 @@ public class UpdateController {
 	Scanner sc = new Scanner(System.in);
 	ArticleService articleService = new ArticleService();
 
-	public void execute() {
-		ArticleDTO articleDTO = new ArticleDTO();
+	public void execute(ArticleDTO articleDTO) {
 		// TODO: 비밀번호 검증(공통)
 		String data = null;
 		System.out.print("식당 이름>> ");
