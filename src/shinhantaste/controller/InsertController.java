@@ -3,18 +3,21 @@ package shinhantaste.controller;
 import java.util.List;
 import java.util.Scanner;
 
+import shinhantaste.Main;
 import shinhantaste.dto.ArticleDTO;
 import shinhantaste.dto.CategoryDTO;
 import shinhantaste.service.ArticleService;
 import shinhantaste.service.CategoryService;
 import shinhantaste.util.InputChecker;
 import shinhantaste.util.PrintUtil;
+import shinhantaste.view.ArticleView;
 import shinhantaste.view.CategoryView;
 
 public class InsertController {
 	Scanner sc = new Scanner(System.in);
 	ArticleService articleService = new ArticleService();
 	CategoryService categoryService = new CategoryService();
+	ArticleView articleView = new ArticleView();
 
 	public void execute() {
 		ArticleDTO articleDTO = new ArticleDTO();
@@ -29,9 +32,17 @@ public class InsertController {
 			getDistance(articleDTO);
 			getPassWord(articleDTO);
 			confirmed = getConfirmation();
-		} while (!confirmed);
-		String result = articleService.insertArticle(articleDTO);
-		PrintUtil.alert(result+"\n\n");
+			if (confirmed) {
+				String result = articleService.insertArticle(articleDTO);
+				PrintUtil.alert(result + "\n\n");
+				Main.main(null);
+				return;
+			}
+			else {
+				Main.main(null);
+				return;
+			}
+		} while (confirmed);
 	}
 
 	public ArticleDTO getTitle(ArticleDTO articleDTO) {
@@ -100,7 +111,7 @@ public class InsertController {
 		PrintUtil.request("별점을 입력하세요.(필수)");
 
 		while (true) {
-			String rating = sc.next();
+			String rating = sc.nextLine();
 			if (rating.isEmpty()) {
 				PrintUtil.alert("필수 항목이 입력되지 않았습니다.");
 				PrintUtil.request("다시 입력해주세요");
@@ -126,19 +137,19 @@ public class InsertController {
 		StringBuilder reviewBuilder = new StringBuilder();
 		String review = "";
 		String line = null;
-		sc.nextLine();
 		while (true) {
 			PrintUtil.request("평가를 입력하세요(100자 이내, 끝내려면 Enter 2번 입력)\n");
+			sc.nextLine();
 			boolean isFirstLine = true;
-			while ( InputChecker.endReviewInput(line = sc.nextLine())) {
+			while (InputChecker.endReviewInput(line = sc.nextLine())) {
 				if (!isFirstLine) {
-                    reviewBuilder.append("\n");
-                } else {
-                    isFirstLine = false;
-                }
+					reviewBuilder.append("\n");
+				} else {
+					isFirstLine = false;
+				}
 				reviewBuilder.append(line);
-
 			}
+			review = reviewBuilder.toString();
 			if (InputChecker.lengthCheck(review, 100)) {
 				break;
 			} else {
@@ -147,7 +158,6 @@ public class InsertController {
 				reviewBuilder = new StringBuilder();
 			}
 		}
-		review = reviewBuilder.toString();
 		articleDTO.setReview(review);
 		return articleDTO;
 	}
@@ -179,31 +189,29 @@ public class InsertController {
 	public ArticleDTO getPassWord(ArticleDTO articleDTO) {
 		// TODO: 엔터 한 번 더 입력해야 넘어감
 		PrintUtil.request("비밀번호를 입력해주세요(4자리 숫자, 필수)");
-		String password = sc.next();
+		String password = sc.nextLine();
 		while (!InputChecker.validPassword(password)) {
-			PrintUtil.request("잘못된 형식입니다.");
+			PrintUtil.alert("잘못된 형식입니다.");
 			PrintUtil.request("다시 입력해주세요");
 			password = sc.next();
 		}
 		articleDTO.setPassword(password);
-		sc.nextLine();
 		return articleDTO;
 	}
 
 	private boolean getConfirmation() {
-		PrintUtil.request("이대로 글을 생성하시겠습니까? (Y/N)");
 		while (true) {
+			PrintUtil.request("이대로 글을 생성하시겠습니까? (Y/N)");
 			String input = sc.nextLine().toUpperCase();
-			//sc.next(); // 버퍼 비우기
+			// sc.next(); // 버퍼 비우기
 
 			if (input.equals("Y")) {
 				return true;
 			} else if (input.equals("N")) {
-				PrintUtil.alert("글 작성이 취소되었습니다.");
+				PrintUtil.alert("글 작성이 취소되었습니다.\n\n");
 				return false;
 			} else {
-				PrintUtil.request("Y 또는 N만 입력해주세요.");
-				PrintUtil.request("이대로 글을 생성하시겠습니까? (Y/N)");
+				PrintUtil.alert("Y 또는 N만 입력해주세요.\n");
 			}
 		}
 	}
