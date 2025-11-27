@@ -31,7 +31,7 @@ public class InsertController {
 			confirmed = getConfirmation();
 		} while (!confirmed);
 		String result = articleService.insertArticle(articleDTO);
-		PrintUtil.alert(result);
+		PrintUtil.alert(result+"\n\n");
 	}
 
 	public ArticleDTO getTitle(ArticleDTO articleDTO) {
@@ -39,9 +39,12 @@ public class InsertController {
 		while (true) {
 			String title = sc.nextLine();
 			if (title.isEmpty()) {
-				PrintUtil.alert("필수 항목이 입력되지 않았습니다.\n입력해주세요");
+				PrintUtil.alert("필수 항목이 입력되지 않았습니다.");
+				PrintUtil.request("다시 입력해주세요");
 			} else if (!InputChecker.lengthCheck(title, 30)) {
-				PrintUtil.alert("최대 30자입니다. 다시 입력해주세요");
+				PrintUtil.alert("최대 30자입니다.");
+				PrintUtil.request("다시 입력해주세요");
+
 			} else {
 				articleDTO.setTitle(title);
 				break;
@@ -56,7 +59,8 @@ public class InsertController {
 		while (true) {
 			String restaurant = sc.nextLine();
 			if (restaurant.isEmpty()) {
-				PrintUtil.alert("필수 항목이 입력되지 않았습니다.\n입력해주세요.");
+				PrintUtil.alert("필수 항목이 입력되지 않았습니다.");
+				PrintUtil.request("다시 입력해주세요");
 			} else {
 				articleDTO.setRestaurant(restaurant);
 				break;
@@ -72,18 +76,20 @@ public class InsertController {
 		while (true) {
 			String categoryId = sc.nextLine();
 			if (categoryId.isEmpty()) {
-				PrintUtil.alert("필수 항목이 입력되지 않았습니다.\n입력해주세요.");
+				PrintUtil.alert("필수 항목이 입력되지 않았습니다.");
+				PrintUtil.request("다시 입력해주세요");
 			} else {
 				try {
 					Integer categoryIdInt = Integer.parseInt(categoryId);
 					if (!InputChecker.inRange(categoryIdInt, 1, 5)) {
-						PrintUtil.alert("1~5까지의 숫자를 입력해주세요.");
+						PrintUtil.request("1~5까지의 숫자를 입력해주세요.");
 						continue;
 					}
 					articleDTO.setCategoryId(categoryIdInt);
 					break;
 				} catch (NumberFormatException e) {
-					PrintUtil.alert("잘못된 입력값입니다.\n다시 입력해주세요.");
+					PrintUtil.alert("잘못된 입력값입니다.");
+					PrintUtil.request("다시 입력해주세요");
 				}
 			}
 		}
@@ -91,24 +97,25 @@ public class InsertController {
 	}
 
 	public ArticleDTO getRating(ArticleDTO articleDTO) {
-		// TODO: 엔터 한 번 더 입력해야 넘어감
 		PrintUtil.request("별점을 입력하세요.(필수)");
 
 		while (true) {
-			String rating = sc.nextLine();
+			String rating = sc.next();
 			if (rating.isEmpty()) {
-				PrintUtil.alert("필수 항목이 입력되지 않았습니다.\n입력해주세요.");
+				PrintUtil.alert("필수 항목이 입력되지 않았습니다.");
+				PrintUtil.request("다시 입력해주세요");
 			} else {
 				try {
 					Integer ratingInt = Integer.parseInt(rating);
 					if (!InputChecker.inRange(ratingInt, 1, 5)) {
-						PrintUtil.alert("1~5까지의 숫자를 입력해주세요.");
+						PrintUtil.request("1~5까지의 숫자를 입력해주세요.");
 						continue;
 					}
 					articleDTO.setRating(ratingInt);
 					break;
 				} catch (NumberFormatException e) {
-					PrintUtil.alert("잘못된 입력값입니다.\n다시 입력해주세요.");
+					PrintUtil.alert("잘못된 입력값입니다.");
+					PrintUtil.request("다시 입력해주세요");
 				}
 			}
 		}
@@ -122,18 +129,21 @@ public class InsertController {
 		sc.nextLine();
 		while (true) {
 			PrintUtil.request("평가를 입력하세요(100자 이내, 끝내려면 Enter 2번 입력)\n");
-			sc.nextLine();  // 위에 \n 제거
-			boolean keepWrite = true;
-			while (keepWrite = InputChecker.endReviewInput(line = sc.nextLine())) {
+			boolean isFirstLine = true;
+			while ( InputChecker.endReviewInput(line = sc.nextLine())) {
+				if (!isFirstLine) {
+                    reviewBuilder.append("\n");
+                } else {
+                    isFirstLine = false;
+                }
 				reviewBuilder.append(line);
-				if (keepWrite) {
-					reviewBuilder.append("\n");
-				}
+
 			}
 			if (InputChecker.lengthCheck(review, 100)) {
 				break;
 			} else {
-				PrintUtil.alert("100자를 넘길 수 없습니다.\n다시 입력해주세요.");
+				PrintUtil.alert("100자를 넘길 수 없습니다.");
+				PrintUtil.request("다시 입력해주세요");
 				reviewBuilder = new StringBuilder();
 			}
 		}
@@ -158,7 +168,8 @@ public class InsertController {
 				articleDTO.setDistance(distanceInt);
 				break;
 			} catch (NumberFormatException e) {
-				PrintUtil.alert("잘못된 입력값입니다.\n다시 입력해주세요.");
+				PrintUtil.alert("잘못된 입력값입니다.");
+				PrintUtil.request("다시 입력해주세요");
 			}
 		}
 
@@ -168,9 +179,10 @@ public class InsertController {
 	public ArticleDTO getPassWord(ArticleDTO articleDTO) {
 		// TODO: 엔터 한 번 더 입력해야 넘어감
 		PrintUtil.request("비밀번호를 입력해주세요(4자리 숫자, 필수)");
-		String password = sc.nextLine();
+		String password = sc.next();
 		while (!InputChecker.validPassword(password)) {
-			PrintUtil.request("잘못된 형식입니다.\n다시 입력해주세요");
+			PrintUtil.request("잘못된 형식입니다.");
+			PrintUtil.request("다시 입력해주세요");
 			password = sc.next();
 		}
 		articleDTO.setPassword(password);
@@ -182,7 +194,7 @@ public class InsertController {
 		PrintUtil.request("이대로 글을 생성하시겠습니까? (Y/N)");
 		while (true) {
 			String input = sc.nextLine().toUpperCase();
-			sc.nextLine(); // 버퍼 비우기
+			//sc.next(); // 버퍼 비우기
 
 			if (input.equals("Y")) {
 				return true;
@@ -190,7 +202,7 @@ public class InsertController {
 				PrintUtil.alert("글 작성이 취소되었습니다.");
 				return false;
 			} else {
-				PrintUtil.alert("Y 또는 N만 입력해주세요.");
+				PrintUtil.request("Y 또는 N만 입력해주세요.");
 				PrintUtil.request("이대로 글을 생성하시겠습니까? (Y/N)");
 			}
 		}
