@@ -155,10 +155,10 @@ public class ArticleDAO {
 			pstmt.setLong(1, articleId);
 			int done = pstmt.executeUpdate();
 			if (done > 0) {
-				result = "글 삭제를 완료했습니다.";
+				result = "글 삭제를 완료했습니다.\n";
 			}
 		} catch (SQLException e) {
-			result = "글 삭제에 실패했습니다.";
+			result = "글 삭제에 실패했습니다.\n";
 			e.printStackTrace();
 		} finally {
 			DBUtil.dbDisconnect(conn, pstmt, rs);

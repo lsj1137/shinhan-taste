@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import shinhantaste.dto.ArticleDTO;
 import shinhantaste.service.ArticleService;
+import shinhantaste.util.PrintUtil;
 import shinhantaste.view.ArticleView;
 
 public class SelectController {
@@ -13,7 +14,6 @@ public class SelectController {
 	ArticleService articleService = new ArticleService();
 
 	public void execute() {
-		boolean isStop = false;
 		standardMenu();
 	}
 
@@ -22,8 +22,8 @@ public class SelectController {
 		sm: while (true) {
 			String job = null;
 			if (beforeJob==null) {
-				System.out.println("(1) 최신순 (2) 별점순 (3) 한식 (4) 중식 (5) 일식 (6) 양식 (7) 기타 (0) 뒤로가기");
-				System.out.print("정렬기준 선택>> ");
+				PrintUtil.alert("(1) 최신순 (2) 별점순 (3) 한식 (4) 중식 (5) 일식 (6) 양식 (7) 기타 (0) 뒤로가기\n");
+				PrintUtil.request("정렬기준 선택");
 				job = sc.next();
 			} else {
 				job = beforeJob;
@@ -47,7 +47,7 @@ public class SelectController {
 				break sm;
 			}
 			default -> {
-				System.out.println("없는 번호입니다. 다시 선택해 주세요.");
+				PrintUtil.alert("없는 번호입니다. 다시 선택해 주세요.\n");
 			}
 			}
 		}
@@ -60,18 +60,18 @@ public class SelectController {
 		boolList[0] = goMain;
 		boolList[1] = goList;
 		am: while (true) {
-			System.out.println("1.상세 조회  2.정렬기준 변경  0.메인으로");
-			System.out.print("선택>> ");
+			PrintUtil.alert("1.상세 조회  2.정렬기준 변경  0.메인으로\n");
+			PrintUtil.request("선택");
 			String job = sc.next();
 
 			switch (job) {
 			case "1" -> {
-				System.out.print("조회할 글 ID 입력>> ");
+				PrintUtil.request("조회할 글 ID 입력");
 				int articleId = sc.nextInt();
 
 				ArticleDTO articleDto = articleService.selectArticleDetail(articleId);
 				if (articleDto == null) {
-					System.out.println("게시글이 존재하지 않습니다.");
+					PrintUtil.alert("게시글이 존재하지 않습니다.\n");
 				} else {
 					ArticleView.printDetail(articleDto);
 					boolList[1] = detailMenu(articleDto);
@@ -87,9 +87,10 @@ public class SelectController {
 			case "0" -> {
 				// 메인으로 이동
 				boolList[0] = true;
+				break am;
 			}
 			default -> {
-				System.out.println("잘못된 번호입니다. 다시 입력해주세요.");
+				PrintUtil.alert("잘못된 번호입니다. 다시 입력해주세요.\n");
 			}
 			}
 		}
@@ -106,12 +107,12 @@ public class SelectController {
 				// TODO: 글 수정 로직
 			}
 			case "2" -> {
-				System.out.println("정말로 삭제하시겠습니까? (Y/N)");
+				PrintUtil.request("정말로 삭제하시겠습니까? (Y/N)");
 				if (sc.next().toUpperCase().equals("Y")) {
 					DeleteController deleteController = new DeleteController();
-					System.out.println(deleteController.execute(articleDTO));
+					PrintUtil.alert(deleteController.execute(articleDTO));
 				} else {
-					System.out.println("글 삭제를 취소합니다.");
+					PrintUtil.alert("글 삭제를 취소합니다.\n");
 				}
 				goList = true;
 				break dm;
@@ -122,7 +123,7 @@ public class SelectController {
 				break dm;
 			}
 			default -> {
-				System.out.println("잘못된 번호입니다. 다시 입력해주세요.");
+				PrintUtil.alert("잘못된 번호입니다. 다시 입력해주세요.\n");
 			}
 			}
 		}
