@@ -65,6 +65,7 @@ public class ArticleDAO {
 			pstmt.setString(3, articleDTO.getRestaurant());
 			pstmt.setInt(4, articleDTO.getRating());
 			pstmt.setString(5, articleDTO.getReview());
+//			if (articleDTO.getDistance() != null)
 			pstmt.setInt(6, articleDTO.getDistance());
 			pstmt.setString(7, articleDTO.getPassword());
 			int done = pstmt.executeUpdate();
