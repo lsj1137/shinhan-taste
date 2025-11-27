@@ -129,35 +129,4 @@ public class SelectController {
 		}
 		return goList;
 	}
-
-	private void handleArticleMenu() {
-		while (true) {
-			System.out.println("\n1. 상세 조회   2. 정렬기준 변경   0. 메인으로");
-			System.out.print("선택>> ");
-			String menu = sc.next();
-
-			if (menu.equals("1")) {
-				// 상세 조회 로직
-				System.out.print("조회할 글 번호 입력>> ");
-				int articleId = sc.nextInt();
-
-				// 서비스에서 글 하나 가져오기 (구현 필요)
-				ArticleDTO article = articleService.getArticleDetail(articleId);
-
-				if (article != null) {
-					ArticleView.printDetail(article); // 상세 내용 출력
-					// 여기서 수정/삭제 메뉴를 또 보여줄 수 있음 (필요하다면)
-				} else {
-					System.out.println("글이 존재하지 않습니다.");
-				}
-
-			} else if (menu.equals("2")) {
-				break; // 이 내부 반복문을 빠져나가면 -> 다시 '정렬기준 선택'으로 돌아갑니다.
-			} else if (menu.equals("0")) {
-				System.exit(0); // 아예 프로그램 종료하거나 메인으로 가는 로직
-			} else {
-				System.out.println("다시 입력해주세요.");
-			}
-		}
-	}
 }
