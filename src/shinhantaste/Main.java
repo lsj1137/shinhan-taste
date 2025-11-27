@@ -8,18 +8,20 @@ import shinhantaste.controller.UpdateController;
 
 public class Main {
 
-    static Scanner sc = new Scanner(System.in);
-    static InsertController insertController = new InsertController();
-    static SelectController selectController = new SelectController();
+	static Scanner sc = new Scanner(System.in);
+	static InsertController insertController = new InsertController();
+	static SelectController selectController = new SelectController();
 
-    public static void main(String[] args) {
-       boolean isStop = false;
-       System.out.println("1. 글쓰기");
-       System.out.println("2. 글조회");
-       System.out.print("작업 선택 >> ");
-       String job = sc.next();
+	public static void main(String[] args) {
+		boolean isStop = false;
+		System.out.println("1. 글쓰기");
+		System.out.println("2. 글조회");
+		System.out.println("0. 프로그램 종료");
 
 		while (!isStop) {
+			System.out.print("작업 선택 >> ");
+			String job = sc.next();
+
 			switch (job) {
 			case "1" -> {
 				insertController.execute();
@@ -27,8 +29,11 @@ public class Main {
 			case "2" -> {
 				selectController.execute();
 			}
-			default -> {
+			case "0" -> {
 				isStop = true;
+			}
+			default -> {
+				System.out.println("잘못된 번호입니다. 다시 입력해주세요\n>>");
 			}
 			}
 		}
