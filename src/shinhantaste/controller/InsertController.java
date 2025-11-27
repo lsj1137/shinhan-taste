@@ -1,14 +1,20 @@
 package shinhantaste.controller;
 
+import java.util.List;
 import java.util.Scanner;
+
 import shinhantaste.dto.ArticleDTO;
+import shinhantaste.dto.CategoryDTO;
 import shinhantaste.service.ArticleService;
+import shinhantaste.service.CategoryService;
 import shinhantaste.util.InputChecker;
 import shinhantaste.util.PrintUtil;
+import shinhantaste.view.CategoryView;
 
 public class InsertController {
 	Scanner sc = new Scanner(System.in);
 	ArticleService articleService = new ArticleService();
+	CategoryService categoryService = new CategoryService();
 
 	public void execute() {
 		ArticleDTO articleDTO = new ArticleDTO();
@@ -61,7 +67,8 @@ public class InsertController {
 
 	public ArticleDTO getCategory(ArticleDTO articleDTO) {
 		PrintUtil.request("카테고리를 입력하세요.(필수)");
-
+		List<CategoryDTO> categoryList = categoryService.selectAll();
+		CategoryView.CategoryMenu(categoryList);
 		while (true) {
 			String categoryId = sc.nextLine();
 			if (categoryId.isEmpty()) {
