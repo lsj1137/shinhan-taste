@@ -25,9 +25,9 @@ public class UpdateController {
 					PrintUtil.alert("비밀번호가 틀립니다.");
 					// TODO: 글 상세 페이지로 돌아가기
 					return;
-				}
-				else {
-					PrintUtil.alert("비밀번호가 일치합니다.");
+				} else {
+					// 비밀번호 일치 입력 메시지
+					PrintUtil.alert("비밀번호가 일치합니다.\n 수정 가능합니다.\n");
 					break;
 				}
 			}
@@ -35,16 +35,6 @@ public class UpdateController {
 
 		ArticleDTO articleDTO = new ArticleDTO();
 		String data = null;
-		PrintUtil.request("식당 이름>> ");
-		String restaurant = null;
-		data = sc.nextLine().trim();
-		if (!data.isEmpty()) {
-			restaurant = data;
-		} else {
-			// 수정 안 할 시, 기존값 불러오기
-			restaurant = prevArticleDTO.getRestaurant();
-		}
-		articleDTO.setRestaurant(restaurant);
 
 		PrintUtil.request("글 제목(최대 30자)>> ");
 		String title = null;
@@ -55,6 +45,17 @@ public class UpdateController {
 			title = prevArticleDTO.getTitle();
 		}
 		articleDTO.setTitle(title);
+
+		PrintUtil.request("식당 이름>> ");
+		String restaurant = null;
+		data = sc.nextLine().trim();
+		if (!data.isEmpty()) {
+			restaurant = data;
+		} else {
+			// 수정 안 할 시, 기존값 불러오기
+			restaurant = prevArticleDTO.getRestaurant();
+		}
+		articleDTO.setRestaurant(restaurant);
 
 		PrintUtil.request("카테고리((1) 한식 (2) 중식 (3) 일식 (4) 양식 (5) 기타)>> ");
 		Integer categoryId = null;
