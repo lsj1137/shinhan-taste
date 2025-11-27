@@ -11,15 +11,15 @@ public class CategoryView {
 			return;
 		}
 
-		System.out.println("\n--------------------------------");
-		System.out.println("       카테고리 메뉴 ");
-		System.out.println("--------------------------------");
-		System.out.printf("| %-5s | %-10s |\n", "번호", "종류");
-		System.out.println("--------------------------------");
+		System.out.println("\n───────────────────────");
+		System.out.println("      카테고리 메뉴     ");
+		System.out.println("┌─────────────────────┐");
+		System.out.printf("│ %-4s │ %-10s │\n", "번호", "종류");
+		System.out.println("├─────────────────────┤");
 		for (CategoryDTO category : categoryList) {
-			System.out.printf("| %-5d | %-10s |\n", category.getCategoryId(), category.getCategoryName());
+			System.out.printf("│ %-5d │ %-10s │\n", category.getCategoryId(), category.getCategoryName());
 		}
-		System.out.println("--------------------------------\n");
+		System.out.println("└─────────────────────┘\n");
 
 	}
 }
