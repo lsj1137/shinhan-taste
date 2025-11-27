@@ -191,4 +191,36 @@ public class ArticleDAO {
 		}
 		return articleDTO;
 	}
+
+	public boolean checkPassword(ArticleDTO prevArticleDTO, String curPw) {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArticleDTO articleDTO = new ArticleDTO();
+		boolean result = false;
+
+		try {
+			conn = DBUtil.dbConnect();
+			pstmt = conn.prepareStatement(SQLQuery.SELECT_ARTICLE);
+			pstmt.setInt(1, prevArticleDTO.getArticleId());
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				articleDTO = makeArticle(rs);
+			}else {
+				// 잘못된 articleId인 경우 false 반환
+				return false;
+			}
+			
+			// 비밀번호 일치
+			if (articleDTO.getPassword().equals(curPw)) result = true;
+			
+		} catch (SQLException e) {
+
+		} finally {
+			DBUtil.dbDisconnect(conn, pstmt, rs);
+		}
+		return result;
+	}
 }

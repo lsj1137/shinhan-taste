@@ -27,4 +27,8 @@ public class ArticleService {
 	public String deleteArticle(Integer articleId) {
 		return articleDAO.deleteArticle(articleId);
 	}
+
+	public boolean checkPassword(ArticleDTO prevArticleDTO, String curPw) {
+		return articleDAO.checkPassword(prevArticleDTO, curPw);
+	}
 }
