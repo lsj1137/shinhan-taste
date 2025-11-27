@@ -1,5 +1,7 @@
 package shinhantaste.service;
 
+import java.util.List;
+
 import shinhantaste.dao.ArticleDAO;
 import shinhantaste.dto.ArticleDTO;
 
@@ -18,5 +20,13 @@ public class ArticleService {
 
 	public List<ArticleDTO> selectArticleByJob(String job) {
 		return articleDAO.selectArticleByJob(job);
+	}
+	
+	public ArticleDTO selectArticleDetail(int articleId) {
+		return articleDAO.selectArticleDetial(articleId);
+	}
+	
+	public String deleteArticle(Integer articleId) {
+		return articleDAO.deleteArticle(articleId);
 	}
 }
