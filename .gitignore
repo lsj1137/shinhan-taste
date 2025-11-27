@@ -3,3 +3,4 @@ config.properties
 /lib/
 .classpath
 .idea/
+/bin/
