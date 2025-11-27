@@ -2,20 +2,24 @@ package shinhantaste.view;
 import java.util.List;
 import shinhantaste.dto.ArticleDTO;
 import shinhantaste.util.PrintUtil;
+import shinhantaste.util.StringUtil;
 public class ArticleView {
 	public static void print(List<ArticleDTO> articleList) {
-		System.out.println("글 번호 | [식당이름] | 제목 | 별점");
-        System.out.println("----------------------------------------");
+		System.out.println(" 글 번호 │     [식당  이름]     │                            제목                              │ 별점");
+        System.out.println("─────────────────────────────────────────────────────────────────────────────────────────────────────");
         for (ArticleDTO dto : articleList) {
-            System.out.printf("%d | [%s] | %s | %d\n",
+        	String name = "["+dto.getRestaurant()+"]";
+        	String title = dto.getTitle();
+        	name = StringUtil.getPaddingString(name, 10);
+        	title = StringUtil.getPaddingString(title, 30);
+            System.out.printf("%8d │ %-10s │ %-30s │ %d\n",
                 dto.getArticleId(),
-                dto.getRestaurant(),
-                dto.getTitle(),
+                name,
+                title,
                 dto.getRating()
             );
-            System.out.println();
         }
-        System.out.println("----------------------------------------");
+        System.out.println("─────────────────────────────────────────────────────────────────────────────────────────────────────");
 	}
 	
 	public static void printDetail(ArticleDTO dto) {
