@@ -2,6 +2,7 @@ package shinhantaste.controller;
 
 import java.util.List;
 import java.util.Scanner;
+
 import shinhantaste.dto.ArticleDTO;
 import shinhantaste.dto.CategoryDTO;
 import shinhantaste.service.ArticleService;

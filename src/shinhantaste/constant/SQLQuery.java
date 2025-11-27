@@ -2,7 +2,7 @@ package shinhantaste.constant;
 
 public class SQLQuery {
 	public static final String SELECT_ARTICLE = """
-
+			SELECT * FROM ARTICLE WHERE article_id = ?
 			""";
 	public static final String INSERT_ARTICLE = """
 			INSERT INTO ARTICLE (category_id, title, restaurant, rating, review, distance, password, created_at)
@@ -10,8 +10,8 @@ public class SQLQuery {
 			""";
 	public static final String UPDATE_ARTICLE = """
 			update article 
-			set categoryId=?, title=?, restaurant=?, rating=?, review=?, distance=?
-			where articleId = ?
+			set category_id=?, title=?, restaurant=?, rating=?, review=?, distance=?
+			where article_id = ?
 			
 """;
 	public static final String DELETE_ARTICLE = """
@@ -36,6 +36,6 @@ public class SQLQuery {
 
 	//특정 카테고리만 조회
 	public static final String SELECT_ARTICLE_ONLY_JOB = """
-						select * from article where categoryId = ?
+						select * from article where category_id = ?
 			""";
 }
