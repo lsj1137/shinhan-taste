@@ -5,6 +5,7 @@ import java.util.Scanner;
 import shinhantaste.controller.InsertController;
 import shinhantaste.controller.SelectController;
 import shinhantaste.controller.UpdateController;
+import shinhantaste.util.PrintUtil;
 
 public class Main {
 
@@ -33,7 +34,8 @@ public class Main {
 				isStop = true;
 			}
 			default -> {
-				System.out.println("잘못된 번호입니다. 다시 입력해주세요\n>>");
+				PrintUtil.alert("잘못된 번호입니다.");
+				PrintUtil.request("다시 입력해주세요");
 			}
 			}
 		}
