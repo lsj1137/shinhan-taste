@@ -1,7 +1,5 @@
 package shinhantaste.service;
 
-import java.util.List;
-
 import shinhantaste.dao.ArticleDAO;
 import shinhantaste.dto.ArticleDTO;
 

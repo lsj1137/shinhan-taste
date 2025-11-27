@@ -23,9 +23,6 @@ public class SelectController {
 			case "1", "2", "3", "4", "5", "6", "7" -> {
 				List<ArticleDTO> articleList = articleService.selectArticleByJob(job);
 				ArticleView.print(articleList);
-<<<<<<< HEAD
-				handleArticleMenu();
-=======
 
 				boolean isStop2 = false;
 				while (!isStop2) {
@@ -60,7 +57,6 @@ public class SelectController {
 					}
 					}
 				}
->>>>>>> 36757b60b35fca55617df346a5cee7646365ce80
 			}
 			case "0" -> {
 				isStop = true;
