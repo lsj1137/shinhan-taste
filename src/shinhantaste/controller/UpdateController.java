@@ -5,6 +5,7 @@ import java.util.Scanner;
 import shinhantaste.dto.ArticleDTO;
 import shinhantaste.service.ArticleService;
 import shinhantaste.util.InputChecker;
+import shinhantaste.util.PrintUtil;
 import shinhantaste.view.ArticleView;
 
 public class UpdateController {
@@ -20,16 +21,16 @@ public class UpdateController {
 			if (!curPw.isEmpty()) {
 				// 비밀번호의 형태가 잘못되었거나, 작성 시 입력한 비밀번호와 다를 때
 				if (!InputChecker.validPassword(curPw) || !articleService.checkPassword(prevArticleDTO, curPw)) {
-					System.out.println("비밀번호가 틀립니다.");
+					PrintUtil.alert("비밀번호가 틀립니다.");
 					// TODO: 글 상세 페이지로 돌아가기
 					return;
 				}
-				System.out.print("비밀번호를 입력해주세요>> ");
+				PrintUtil.request("비밀번호를 입력하세요.");
 			}
 
 			ArticleDTO articleDTO = new ArticleDTO();
 			String data = null;
-			System.out.print("식당 이름>> ");
+			PrintUtil.request("식당 이름>> ");
 			String restaurant = null;
 			data = sc.nextLine().trim();
 			if (!data.isEmpty()) {
@@ -40,7 +41,7 @@ public class UpdateController {
 			}
 			articleDTO.setRestaurant(restaurant);
 
-			System.out.print("글 제목(최대 30자)>> ");
+			PrintUtil.request("글 제목(최대 30자)>> ");
 			String title = null;
 			data = sc.nextLine().trim();
 			if (!data.isEmpty()) {
@@ -50,7 +51,7 @@ public class UpdateController {
 			}
 			articleDTO.setTitle(title);
 
-			System.out.print("카테고리((1) 한식 (2) 중식 (3) 일식 (4) 양식 (5) 기타)>> ");
+			PrintUtil.request("카테고리((1) 한식 (2) 중식 (3) 일식 (4) 양식 (5) 기타)>> ");
 			Integer categoryId = null;
 			data = sc.nextLine().trim();
 			if (!data.isEmpty()) {
@@ -60,7 +61,7 @@ public class UpdateController {
 			}
 			articleDTO.setCategoryId(categoryId);
 
-			System.out.print("별점>> ");
+			PrintUtil.request("별점>> ");
 			Integer rating = null;
 			data = sc.nextLine().trim();
 			if (!data.isEmpty()) {
@@ -70,7 +71,7 @@ public class UpdateController {
 			}
 			articleDTO.setRating(rating);
 
-			System.out.print("평가(최대 100자, 입력을 끝내려면 Enter 2번)>> ");
+			PrintUtil.request("평가(최대 100자, 입력을 끝내려면 Enter 2번)>> ");
 			String review = null;
 			StringBuilder sb = new StringBuilder();
 			while (true) {
@@ -88,7 +89,7 @@ public class UpdateController {
 			}
 			articleDTO.setReview(review);
 
-			System.out.print("위치(도보 몇 분)>> ");
+			PrintUtil.request("위치(도보 몇 분)>> ");
 			Integer distance = null;
 			data = sc.nextLine().trim();
 			if (!data.isEmpty()) {
