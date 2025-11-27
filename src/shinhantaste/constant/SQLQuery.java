@@ -23,7 +23,7 @@ public class SQLQuery {
 	//최신순, 별점순 정렬
 
 	public static final String SELECT_CATEGORY = """
-			select * from category order by category_id
+			select category_id,category_name from category order by category_id
 			""";
 
 	// 최신순, 별점순 정렬
