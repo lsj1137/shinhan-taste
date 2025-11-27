@@ -1,16 +1,13 @@
 package shinhantaste.dao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import shinhantaste.constant.SQLQuery;
 import shinhantaste.dto.ArticleDTO;
 import shinhantaste.util.DBUtil;
-
 public class ArticleDAO {
 
 	private ArticleDTO makeArticle(ResultSet rs) throws SQLException {
