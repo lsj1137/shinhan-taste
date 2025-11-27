@@ -41,9 +41,8 @@ public class ArticleView {
             case 4 -> "양식"; case 7 -> "기타"; default -> "기타";
         };
     }
-}
 	
-	public static void printDeleteMenu() {
-		System.out.println("삭제할 글을 선택해주세요 >> ");
+	public static void printDetailMenu() {
+		System.out.print("1. 수정  2. 삭제  0. 글 목록으로\n선택>> ");
 	}
 }
