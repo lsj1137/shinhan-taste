@@ -50,39 +50,37 @@ public class ArticleDAO {
 		return articleList;
 
 	}
-	
-	public String insertArticle(ArticleDTO articleDTO) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        String result = "";
 
-        try {
-            conn = DBUtil.dbConnect();
-            pstmt = conn.prepareStatement(SQLQuery.INSERT_ARTICLE);
+	public String insertArticle(ArticleDTO articleDTO) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String result = "";
+
+		try {
+			conn = DBUtil.dbConnect();
+			pstmt = conn.prepareStatement(SQLQuery.INSERT_ARTICLE);
 			pstmt.setLong(1, articleDTO.getCategoryId());
 			pstmt.setString(2, articleDTO.getTitle());
 			pstmt.setString(3, articleDTO.getRestaurant());
 			pstmt.setInt(4, articleDTO.getRating());
 			pstmt.setString(5, articleDTO.getReview());
+//			if (articleDTO.getDistance() != null)
 			pstmt.setInt(6, articleDTO.getDistance());
-			pstmt.setString(7,  articleDTO.getPassword());
+			pstmt.setString(7, articleDTO.getPassword());
 			int done = pstmt.executeUpdate();
-			if (done>0) {
+			if (done > 0) {
 				result = "글 등록을 완료했습니다.";
 			}
-        } catch (SQLException e) {
-        	result = "글 등록에 실패했습니다.";
-            e.printStackTrace();
-        } finally {
-            DBUtil.dbDisconnect(conn, pstmt, rs);
-        }
-        
+		} catch (SQLException e) {
+			result = "글 등록에 실패했습니다.";
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisconnect(conn, pstmt, rs);
+		}
+
 		return result;
 	}
-	
-	
-	
 
 	public void updateArticle(ArticleDTO articleDTO) {
 		int result = 0;
@@ -144,28 +142,53 @@ public class ArticleDAO {
 		return articleList;
 
 	}
-	
-	
+
 	public String deleteArticle(Integer articleId) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-        String result = "";
+		String result = "";
 
-        try {
-            conn = DBUtil.dbConnect();
-            pstmt = conn.prepareStatement(SQLQuery.DELETE_ARTICLE);
+		try {
+			conn = DBUtil.dbConnect();
+			pstmt = conn.prepareStatement(SQLQuery.DELETE_ARTICLE);
 			pstmt.setLong(1, articleId);
 			int done = pstmt.executeUpdate();
-			if (done>0) {
+			if (done > 0) {
 				result = "글 삭제를 완료했습니다.";
 			}
-        } catch (SQLException e) {
-        	result = "글 삭제에 실패했습니다.";
-            e.printStackTrace();
-        } finally {
-            DBUtil.dbDisconnect(conn, pstmt, rs);
-        }
+		} catch (SQLException e) {
+			result = "글 삭제에 실패했습니다.";
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisconnect(conn, pstmt, rs);
+		}
 		return result;
+	}
+
+	public ArticleDTO selectArticleDetial(int articleId) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArticleDTO articleDTO = new ArticleDTO();
+
+		try {
+			conn = DBUtil.dbConnect();
+			pstmt = conn.prepareStatement(SQLQuery.SELECT_ARTICLE);
+			pstmt.setInt(1, articleId);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				articleDTO = makeArticle(rs);
+			}else {
+				// 잘못된 articleId인 경우 null 반환
+				return null;
+			}
+		} catch (SQLException e) {
+
+		} finally {
+			DBUtil.dbDisconnect(conn, pstmt, rs);
+		}
+		return articleDTO;
 	}
 }
