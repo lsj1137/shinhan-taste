@@ -82,27 +82,34 @@ public class ArticleDAO {
 		return result;
 	}
 
-	public void updateArticle(ArticleDTO articleDTO) {
-		int result = 0;
+	public int updateArticle(ArticleDTO articleDTO) {
 		Connection conn = null;
 		PreparedStatement st = null;
+		int result = 0;
 
 		try {
 			conn = DBUtil.dbConnect();
 			st = conn.prepareStatement(SQLQuery.UPDATE_ARTICLE);
-			st.setInt(1, articleDTO.getArticleId());
+			st.setInt(1, articleDTO.getCategoryId());
 			st.setString(2, articleDTO.getTitle());
 			st.setString(3, articleDTO.getRestaurant());
 			st.setInt(4, articleDTO.getRating());
 			st.setString(5, articleDTO.getReview());
 			st.setInt(6, articleDTO.getDistance());
-			result = st.executeUpdate();
+			st.setInt(7, articleDTO.getArticleId());
+			int done = st.executeUpdate();
+			if (done>0) {
+				result = done;
+			} else {
+				result = done;
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			result = -2;
 			e.printStackTrace();
 		} finally {
 			DBUtil.dbDisconnect(conn, st, null);
 		}
+		return result;
 	}
 
 	public List<ArticleDTO> selectArticleByJob(String job) {
